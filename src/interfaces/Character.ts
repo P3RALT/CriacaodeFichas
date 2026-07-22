@@ -1,4 +1,3 @@
-// Define a estrutura dos 5 atributos -
 export interface Attributes {
   fisico: number;
   conhecimento: number;
@@ -7,32 +6,41 @@ export interface Attributes {
   vigor: number;
 }
 
-export interface Character {
-  id?: string;          // ID Firestore
-  uid: string;          // ID do usuário
+// Tipo do nível de perícia
+export type ProficiencyLevel = 'treinado' | 'expert';
 
-// Informações Gerais
+export interface Character {
+  id?: string;
+  uid: string;
+
+  // Informações Gerais & Nível
   nome: string;
-  idade: number;
+  nivel?: number;
+  maestria?: number;
+  idade?: number;
   origem: string;
-  arquetipo: string;
+  profissao: string;
+  arquetipo?: string;
   imagem?: string;
 
-  // Atributos e Perícias
-  atributos: Attributes;
-  pericias: string[];
-
-  // Roleplay & Lore
-  historia: string;
-  conflito: string;
-  vinculo: string;
-
-  // Status de Jogo (Pontos de Vida e Pontos de Esforço/Energia)
+  // Status de Jogo
   vidaAtual: number;
   vidaMaxima: number;
   peAtual: number;
   peMaximo: number;
-  
-  createdAt?: any;     // Data 
-}
 
+  // Defesa & Combate
+  armadura?: number;
+  outrosDefesa?: number;
+  defesaTotal?: number;
+
+  // Atributos e Perícias
+  atributos: Attributes;
+  pericias?: Record<string, ProficiencyLevel>; // Mapeia nome da perícia para o nível
+  conhecimentosText?: string;
+
+  // Lore
+  historia: string;
+
+  createdAt?: any;
+}
