@@ -4,17 +4,36 @@ import {
   getDocs, 
   getDoc,
   doc, 
+  setDoc,
   query, 
   where, 
   deleteDoc, 
   updateDoc,
+  arrayUnion,
   serverTimestamp 
 } from 'firebase/firestore';
 import { db } from './firebase';
 import type { Character } from '../interfaces/Character';
 
-
 const COLLECTION_NAME = 'characters';
+
+// ==========================================
+// INTERFACES
+// ==========================================
+
+export interface Campaign {
+  id: string;
+  nome: string;
+  descricao: string;
+  imagem: string;
+  criadorId: string;
+  criadoEm: string;
+  membros: string[];
+}
+
+// ==========================================
+// FUNÇÕES DE PERSONAGEM
+// ==========================================
 
 // Criar uma nova ficha
 export const createCharacter = async (characterData: Omit<Character, 'id'>) => {
@@ -30,7 +49,7 @@ export const createCharacter = async (characterData: Omit<Character, 'id'>) => {
   }
 };
 
-// Buscar apenas as fichas do usuário logado (Segurança por UID)
+// Buscar apenas as fichas do usuário logado
 export const getUserCharacters = async (uid: string): Promise<Character[]> => {
   try {
     const q = query(collection(db, COLLECTION_NAME), where('uid', '==', uid));
@@ -85,6 +104,69 @@ export const deleteCharacter = async (id: string) => {
     await deleteDoc(docRef);
   } catch (error) {
     console.error('Erro ao deletar personagem:', error);
+    throw error;
+  }
+};
+
+// ==========================================
+// FUNÇÕES DE CAMPANHA
+// ==========================================
+
+// Criar campanha
+export const createCampaign = async (campaignData: Campaign) => {
+  try {
+    const campaignRef = doc(db, 'campaigns', campaignData.id);
+    await setDoc(campaignRef, campaignData);
+  } catch (error) {
+    console.error('Erro ao criar campanha:', error);
+    throw error;
+  }
+};
+
+// Buscar campanha pelo Código/ID
+export const getCampaignById = async (id: string): Promise<Campaign | null> => {
+  try {
+    const docRef = doc(db, 'campaigns', id.toLowerCase().trim());
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data() as Campaign;
+    }
+    return null;
+  } catch (error) {
+    console.error('Erro ao buscar campanha:', error);
+    throw error;
+  }
+};
+
+// Adicione no final do arquivo src/firebase/firestore.ts
+export const getUserCampaigns = async (uid: string): Promise<Campaign[]> => {
+  try {
+    const q = query(collection(db, 'campaigns'), where('membros', 'array-contains', uid));
+    const querySnapshot = await getDocs(q);
+
+    const campaigns: Campaign[] = [];
+    querySnapshot.forEach((doc) => {
+      campaigns.push(doc.data() as Campaign);
+    });
+
+    return campaigns;
+  } catch (error) {
+    console.error('Erro ao buscar campanhas do usuário:', error);
+    throw error;
+  }
+};
+
+
+// Entrar em uma campanha
+export const joinCampaign = async (campaignId: string, userId: string) => {
+  try {
+    const docRef = doc(db, 'campaigns', campaignId);
+    await updateDoc(docRef, {
+      membros: arrayUnion(userId),
+    });
+  } catch (error) {
+    console.error('Erro ao entrar na campanha:', error);
     throw error;
   }
 

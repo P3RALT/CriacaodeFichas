@@ -223,9 +223,9 @@ export const NewCharacter = () => {
 
   if (fetching) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-200">
         <Navbar />
-        <div className="text-center py-20 font-mono text-xs text-slate-400 uppercase tracking-widest">
+        <div className="text-center py-20 font-mono text-xs text-slate-400 dark:text-slate-500 uppercase tracking-widest animate-pulse">
           Carregando dados da ficha...
         </div>
       </div>
@@ -233,39 +233,39 @@ export const NewCharacter = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-slate-100">
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-slate-100 dark:selection:bg-slate-800 transition-colors duration-200">
       <Navbar />
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-900 text-xs font-mono font-bold uppercase tracking-wider transition"
+            className="inline-flex items-center gap-2 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 text-xs font-mono font-bold uppercase tracking-wider transition"
           >
             <ArrowLeft className="w-4 h-4" /> Voltar ao Dashboard
           </Link>
 
-          <h1 className="text-xl font-mono font-light tracking-[0.35em] text-slate-950 uppercase">
+          <h1 className="text-lg sm:text-xl font-mono font-light tracking-[0.35em] text-slate-950 dark:text-slate-100 uppercase">
             {isEditing ? 'EDITAR FICHA' : 'NOVA FICHA'}
           </h1>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
             
             {/* COLUNA ESQUERDA */}
             <div className="lg:col-span-7 xl:col-span-8 space-y-6">
               
               {/* Informações Pessoais */}
-              <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-5">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 sm:p-6 shadow-sm space-y-5">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
                   <div className="flex items-center gap-2">
-                    <User className="w-4 h-4 text-slate-400" />
-                    <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 uppercase">
+                    <User className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+                    <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 dark:text-slate-100 uppercase">
                       Informações Pessoais
                     </h2>
                   </div>
-                  <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-3 py-1 rounded-full text-xs font-mono font-bold text-slate-700">
+                  <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1 rounded-full text-xs font-mono font-bold text-slate-700 dark:text-slate-300">
                     <Award className="w-3.5 h-3.5 text-amber-500" />
                     <span>Maestria: +{maestria}</span>
                   </div>
@@ -273,170 +273,176 @@ export const NewCharacter = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="sm:col-span-2">
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 ml-1">
+                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1">
                       Nome do Personagem
                     </label>
                     <input
                       type="text" required value={nome}
                       onChange={(e) => setNome(e.target.value)}
                       placeholder="Ex: Arthur Pendelton"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm focus:outline-none focus:border-slate-400 transition"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm placeholder-slate-300 dark:placeholder-slate-600"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 ml-1">
+                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1">
                       Nível (1 - 20) *
                     </label>
                     <select
                       value={nivel}
                       onChange={(e) => setNivel(Number(e.target.value))}
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm font-mono font-bold focus:outline-none focus:border-slate-400 transition"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-800 dark:text-slate-100 text-sm font-mono font-bold focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm"
                     >
                       {Array.from({ length: 20 }, (_, i) => i + 1).map((lvl) => (
-                        <option key={lvl} value={lvl}>Nível {lvl}</option>
+                        <option key={lvl} value={lvl} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
+                          Nível {lvl}
+                        </option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 ml-1">
+                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1">
                       Profissão
                     </label>
                     <input
                       type="text" required value={arquetipo}
                       onChange={(e) => setArquetipo(e.target.value)}
                       placeholder="Engenharia, T.I, Medicina"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm focus:outline-none focus:border-slate-400 transition"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm placeholder-slate-300 dark:placeholder-slate-600"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 ml-1">
+                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1">
                       Origem
                     </label>
                     <input
                       type="text" required value={origem}
                       onChange={(e) => setOrigem(e.target.value)}
                       placeholder="Ex: Sedutor..."
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm focus:outline-none focus:border-slate-400 transition"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm placeholder-slate-300 dark:placeholder-slate-600"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 ml-1 flex items-center gap-1">
-                      <ImageIcon className="w-3 h-3 text-slate-400" /> URL da Imagem
+                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1 flex items-center gap-1">
+                      <ImageIcon className="w-3 h-3 text-slate-400 dark:text-slate-500" /> URL da Imagem
                     </label>
                     <input
                       type="url" value={imagem}
                       onChange={(e) => setImagem(e.target.value)}
                       placeholder="https://exemplo.com/foto.jpg"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm focus:outline-none focus:border-slate-400 transition"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm placeholder-slate-300 dark:placeholder-slate-600"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Pontos de Status */}
-              <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-5">
-                <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                  <Heart className="w-4 h-4 text-slate-400" />
-                  <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 uppercase">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 sm:p-6 shadow-sm space-y-5">
+                <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <Heart className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+                  <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 dark:text-slate-100 uppercase">
                     Pontos de Status
                   </h2>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 ml-1 flex items-center gap-1">
+                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1 flex items-center gap-1">
                       <Heart className="w-3 h-3 text-red-500" /> Vida Máx.
                     </label>
                     <input
                       type="number" value={vidaMaxima}
                       onChange={(e) => setVidaMaxima(Number(e.target.value))}
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm font-mono focus:outline-none focus:border-slate-400 transition"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-800 dark:text-slate-100 text-sm font-mono focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 ml-1">
+                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1">
                       Vida Atual
                     </label>
                     <input
                       type="number" value={vidaAtual}
                       onChange={(e) => setVidaAtual(Number(e.target.value))}
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm font-mono focus:outline-none focus:border-slate-400 transition"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-800 dark:text-slate-100 text-sm font-mono focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 ml-1 flex items-center gap-1">
+                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1 flex items-center gap-1">
                       <Zap className="w-3 h-3 text-amber-500" /> PE Máx.
                     </label>
                     <input
                       type="number" value={peMaximo}
                       onChange={(e) => setPeMaximo(Number(e.target.value))}
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm font-mono focus:outline-none focus:border-slate-400 transition"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-800 dark:text-slate-100 text-sm font-mono focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5 ml-1">
+                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1">
                       PE Atual
                     </label>
                     <input
                       type="number" value={peAtual}
                       onChange={(e) => setPeAtual(Number(e.target.value))}
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm font-mono focus:outline-none focus:border-slate-400 transition"
+                      className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-800 dark:text-slate-100 text-sm font-mono focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm"
                     />
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-slate-100">
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800">
                   <div className="flex items-center gap-2 mb-3">
-                    <Shield className="w-3.5 h-3.5 text-slate-500" />
-                    <span className="text-[11px] font-mono font-bold tracking-wider text-slate-700 uppercase">
+                    <Shield className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
+                    <span className="text-[11px] font-mono font-bold tracking-wider text-slate-700 dark:text-slate-300 uppercase">
                       Cálculo de Defesa (10 + Mod. Físico + Armadura + Bônus)
                     </span>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 items-center">
                     <div>
-                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-2 ml-1">Bônus Armadura</label>
+                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1">Bônus Armadura</label>
                       <input
                         type="number" value={armadura}
                         onChange={(e) => setArmadura(Number(e.target.value))}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-800 text-sm font-mono focus:outline-none focus:border-slate-400 transition"
+                        className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2 text-slate-800 dark:text-slate-100 text-sm font-mono focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-2 ml-1">Bônus Extra</label>
+                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5 ml-1">Bônus Extra</label>
                       <input
                         type="number" value={outrosDefesa}
                         onChange={(e) => setOutrosDefesa(Number(e.target.value))}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-800 text-sm font-mono focus:outline-none focus:border-slate-400 transition"
+                        className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2 text-slate-800 dark:text-slate-100 text-sm font-mono focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm"
                       />
                     </div>
-                    <div className="bg-slate-50 border border-slate-100 rounded-2xl p-2.5 text-center flex flex-col justify-center items-center h-full">
-                      <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest">Defesa Total</span>
-                      <span className="text-xl font-mono font-extrabold text-slate-900 mt-0.5">{defesaTotal}</span>
+                    <div className="bg-slate-50 dark:bg-slate-950/60 border border-slate-100 dark:border-slate-800/80 rounded-2xl p-2.5 text-center flex flex-col justify-center items-center h-full">
+                      <span className="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Defesa Total</span>
+                      <span className="text-xl font-mono font-extrabold text-slate-900 dark:text-slate-100 mt-0.5">{defesaTotal}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Tabela de Atributos */}
-              <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 sm:p-6 shadow-sm space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-slate-400" />
-                    <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 uppercase">Atributos Principais</h2>
+                    <Sparkles className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+                    <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 dark:text-slate-100 uppercase">Atributos Principais</h2>
                   </div>
-                  <div className={`text-xs font-mono font-bold px-3 py-1 rounded-full border transition ${pontosRestantes < 0 ? 'bg-red-50 text-red-600 border-red-200' : 'bg-slate-50 text-slate-800 border-slate-200'}`}>
+                  <div className={`text-xs font-mono font-bold px-3 py-1 rounded-full border transition self-start sm:self-auto ${
+                    pontosRestantes < 0 
+                      ? 'bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border-red-200 dark:border-red-900/60' 
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700'
+                  }`}>
                     Restantes: {pontosRestantes} / {pontosTotaisDisponiveis}
                   </div>
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
+                  <table className="w-full text-left border-collapse min-w-[300px]">
                     <thead>
-                      <tr className="border-b border-slate-100 text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                      <tr className="border-b border-slate-100 dark:border-slate-800 text-[10px] font-mono text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                         <th className="pb-2 pl-2">Atributo</th>
                         <th className="pb-2 text-center">Valor Bruto</th>
                         <th className="pb-2 text-center">Modificador</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100 text-xs font-mono">
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-xs font-mono">
                       {[
                         { label: 'FÍSICO', val: fisico, set: setFisico },
                         { label: 'CONHECIMENTO', val: conhecimento, set: setConhecimento },
@@ -446,17 +452,17 @@ export const NewCharacter = () => {
                       ].map((attr) => {
                         const mod = getModifier(attr.val);
                         return (
-                          <tr key={attr.label} className="hover:bg-slate-50/50 transition">
-                            <td className="py-2.5 pl-2 font-bold text-slate-800">{attr.label}</td>
-                            <td className="py-4 text-center">
+                          <tr key={attr.label} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition">
+                            <td className="py-2.5 pl-2 font-bold text-slate-800 dark:text-slate-200">{attr.label}</td>
+                            <td className="py-2.5 text-center">
                               <input
                                 type="number" step="1"
                                 value={attr.val}
                                 onChange={(e) => attr.set(Number(e.target.value))}
-                                className="w-16 text-center bg-slate-50 border border-slate-200 rounded-lg py-1 font-bold text-slate-900 focus:outline-none focus:border-slate-400"
+                                className="w-16 text-center bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg py-1 font-bold text-slate-900 dark:text-slate-100 focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 shadow-sm"
                               />
                             </td>
-                            <td className="py-2.5 text-center font-extrabold text-slate-900">
+                            <td className="py-2.5 text-center font-extrabold text-slate-900 dark:text-slate-100">
                               {mod >= 0 ? `+${mod}` : mod}
                             </td>
                           </tr>
@@ -468,58 +474,60 @@ export const NewCharacter = () => {
               </div>
 
               {/* Anotações e História */}
-              <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4">
-                <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                  <BookOpen className="w-4 h-4 text-slate-400" />
-                  <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 uppercase">Anotações</h2>
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 sm:p-6 shadow-sm space-y-4">
+                <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <BookOpen className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+                  <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 dark:text-slate-100 uppercase">Anotações</h2>
                 </div>
                 <textarea
                   rows={2} value={conhecimentosText}
                   onChange={(e) => setConhecimentosText(e.target.value)}
                   placeholder="Idiomas, especializações extras..."
-                  className="w-full bg-white border border-slate-200 rounded-xl p-3 text-slate-800 text-xs focus:outline-none focus:border-slate-400 transition"
+                  className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-800 dark:text-slate-100 text-xs focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm placeholder-slate-300 dark:placeholder-slate-600"
                 />
               </div>
-              <div className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4">
-                <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                  <FileText className="w-4 h-4 text-slate-400" />
-                  <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 uppercase">História</h2>
+
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 sm:p-6 shadow-sm space-y-4">
+                <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <FileText className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+                  <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 dark:text-slate-100 uppercase">História</h2>
                 </div>
                 <textarea
                   rows={3} value={historia}
                   onChange={(e) => setHistoria(e.target.value)}
                   placeholder="Seu passado..."
-                  className="w-full bg-white border border-slate-200 rounded-xl p-3 text-slate-800 text-xs focus:outline-none focus:border-slate-400 transition"
+                  className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-800 dark:text-slate-100 text-xs focus:outline-none focus:border-slate-400 dark:focus:border-slate-600 transition shadow-sm placeholder-slate-300 dark:placeholder-slate-600"
                 />
               </div>
             </div>
 
-            {/* COLUNA DIREITA (Perícias Sticky) */}
+            {/* COLUNA DIREITA (Perícias Sticky em desktop) */}
             <div className="lg:col-span-5 xl:col-span-4 lg:sticky lg:top-6 space-y-6">
-              <div className="bg-white border border-slate-200/80 rounded-3xl p-5 shadow-sm space-y-4">
-                <div className="border-b border-slate-100 pb-3">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 sm:p-5 shadow-sm space-y-4">
+                <div className="border-b border-slate-100 dark:border-slate-800 pb-3">
                   <div className="flex items-center justify-between mb-1.5">
                     <div className="flex items-center gap-2">
-                      <Target className="w-4 h-4 text-slate-400" />
-                      <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 uppercase">Perícias</h2>
+                      <Target className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+                      <h2 className="text-xs font-mono font-bold tracking-[0.2em] text-slate-900 dark:text-slate-100 uppercase">Perícias</h2>
                     </div>
                     {nivel === 1 && (
-                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                         N1: {periciasTreinadasCount}/{limitePericiasNivel1}
                       </span>
                     )}
                   </div>
-                  <p className="text-slate-400 text-[10px]">T (+M) ou E (+2xM)</p>
+                  <p className="text-slate-400 dark:text-slate-500 text-[10px]">T (+M) ou E (+2xM)</p>
                 </div>
-                <div className="space-y-3 max-h-[72vh] overflow-y-auto pr-1">
+                
+                <div className="space-y-3 max-h-[60vh] sm:max-h-[72vh] overflow-y-auto pr-1 custom-scrollbar">
                   {(['fisico', 'conhecimento', 'presenca', 'sabedoria'] as const).map((attrKey) => {
                     const periciasDoAttr = LISTA_PERICIAS.filter((p) => p.atributo === attrKey);
                     const attrMod = modMap[attrKey];
                     return (
-                      <div key={attrKey} className="bg-slate-50/70 border border-slate-200/60 rounded-xl p-2.5 space-y-1.5">
-                        <div className="flex justify-between items-center border-b border-slate-200/50 pb-1">
-                          <span className="text-[10px] font-mono font-extrabold text-slate-800 uppercase">{attrKey}</span>
-                          <span className="text-[10px] font-mono font-bold text-slate-400">Mod: {attrMod >= 0 ? `+${attrMod}` : attrMod}</span>
+                      <div key={attrKey} className="bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 rounded-xl p-2.5 space-y-1.5">
+                        <div className="flex justify-between items-center border-b border-slate-200/50 dark:border-slate-800/50 pb-1">
+                          <span className="text-[10px] font-mono font-extrabold text-slate-800 dark:text-slate-200 uppercase">{attrKey}</span>
+                          <span className="text-[10px] font-mono font-bold text-slate-400 dark:text-slate-500">Mod: {attrMod >= 0 ? `+${attrMod}` : attrMod}</span>
                         </div>
                         <div className="space-y-1">
                           {periciasDoAttr.map((item) => {
@@ -528,19 +536,29 @@ export const NewCharacter = () => {
                             if (level === 'treinado') bonusTotal += maestria;
                             if (level === 'expert') bonusTotal += maestria * 2;
                             return (
-                              <div key={item.nome} className="flex items-center justify-between bg-white border border-slate-200/60 rounded-lg px-2.5 py-1.5 text-xs hover:border-slate-300 transition">
+                              <div key={item.nome} className="flex items-center justify-between bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-lg px-2.5 py-1.5 text-xs hover:border-slate-300 dark:hover:border-slate-700 transition">
                                 <div className="flex items-center gap-1.5">
-                                  <span className="font-mono font-medium text-slate-800 text-[11px]">{item.nome}</span>
-                                  <span className="text-[10px] font-mono font-extrabold text-slate-900 bg-slate-100 px-1 rounded">{bonusTotal >= 0 ? `+${bonusTotal}` : bonusTotal}</span>
+                                  <span className="font-mono font-medium text-slate-800 dark:text-slate-200 text-[11px]">{item.nome}</span>
+                                  <span className="text-[10px] font-mono font-extrabold text-slate-900 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 px-1 rounded">{bonusTotal >= 0 ? `+${bonusTotal}` : bonusTotal}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                   <label className="flex items-center gap-0.5 cursor-pointer select-none">
-                                    <input type="checkbox" checked={level === 'treinado' || level === 'expert'} onChange={() => handleTogglePericia(item.nome, 'treinado')} className="w-3 h-3 rounded border-slate-300 text-slate-900 focus:ring-slate-400" />
-                                    <span className="text-[9px] font-mono font-bold text-slate-500 uppercase">T</span>
+                                    <input 
+                                      type="checkbox" 
+                                      checked={level === 'treinado' || level === 'expert'} 
+                                      onChange={() => handleTogglePericia(item.nome, 'treinado')} 
+                                      className="w-3 h-3 rounded border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-slate-400 dark:bg-slate-950" 
+                                    />
+                                    <span className="text-[9px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase">T</span>
                                   </label>
                                   <label className="flex items-center gap-0.5 cursor-pointer select-none">
-                                    <input type="checkbox" checked={level === 'expert'} onChange={() => handleTogglePericia(item.nome, 'expert')} className="w-3 h-3 rounded border-slate-300 text-slate-900 focus:ring-slate-400" />
-                                    <span className="text-[9px] font-mono font-bold text-slate-500 uppercase">E</span>
+                                    <input 
+                                      type="checkbox" 
+                                      checked={level === 'expert'} 
+                                      onChange={() => handleTogglePericia(item.nome, 'expert')} 
+                                      className="w-3 h-3 rounded border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:ring-slate-400 dark:bg-slate-950" 
+                                    />
+                                    <span className="text-[9px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase">E</span>
                                   </label>
                                 </div>
                               </div>
@@ -556,9 +574,18 @@ export const NewCharacter = () => {
           </div>
 
           {/* Botões de Ação */}
-          <div className="flex items-center justify-end gap-4 pt-4 border-t border-slate-100">
-            <Link to="/" className="px-6 py-3 rounded-full border border-slate-200 text-slate-600 hover:text-slate-900 text-xs font-mono font-bold uppercase transition">Cancelar</Link>
-            <button type="submit" disabled={loading || pontosRestantes < 0} className="flex items-center gap-2 bg-[#080b11] hover:bg-slate-800 text-white text-xs font-mono font-bold uppercase tracking-widest px-8 py-3.5 rounded-full transition shadow-md disabled:opacity-50">
+          <div className="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 sm:gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <Link 
+              to="/" 
+              className="w-full sm:w-auto text-center px-6 py-3 rounded-full border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-xs font-mono font-bold uppercase transition active:scale-95"
+            >
+              Cancelar
+            </Link>
+            <button 
+              type="submit" 
+              disabled={loading || pontosRestantes < 0} 
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#080b11] hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 text-white dark:text-slate-950 text-xs font-mono font-bold uppercase tracking-widest px-8 py-3.5 rounded-full transition shadow-md disabled:opacity-50 active:scale-95"
+            >
               <Save className="w-4 h-4" />
               {loading ? 'Salvando...' : isEditing ? 'Atualizar Ficha' : 'Salvar Ficha'}
             </button>
