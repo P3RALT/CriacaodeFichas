@@ -9,6 +9,7 @@ import { CreateCampaign } from './pages/CreateCampaign';
 import { SearchCampaign } from './pages/SearchCampaign';
 import { PrivateRoute } from './components/PrivateRoute';
 import { MasterPanel } from './pages/MasterPanel';
+import { PlayerCampaign } from './pages/PlayerCampaign';
 
 export function App() {
   return (
@@ -16,10 +17,13 @@ export function App() {
       <AuthProvider>
         <Routes>
           {/* Rotas Públicas */}
-          <Route path="/mestre/:campaignId" element={<MasterPanel />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
 
+          {/* Rotas Protegidas do Mestre e Jogador */}
+          <Route path="/mestre/:campaignId" element={<PrivateRoute><MasterPanel /></PrivateRoute>} />
+          <Route path="/campaign/:campaignId" element={<PrivateRoute><PlayerCampaign /></PrivateRoute>} />
           {/* Rotas Protegidas de Campanhas */}
           <Route path="/campaign/new" element={<PrivateRoute><CreateCampaign /></PrivateRoute>} />
           <Route path="/campaign/search" element={<PrivateRoute><SearchCampaign /></PrivateRoute>} />

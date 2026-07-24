@@ -170,5 +170,4 @@ export const joinCampaign = async (campaignId: string, userId: string) => {
     throw error;
   }
 
-  
 };
